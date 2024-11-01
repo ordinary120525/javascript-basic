@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>click 이벤트(onclick)</title>
+  </head>
+  <body>
+    <button id="btn">클릭</button>
+    <button class="btn2">클릭</button>
+    <button onclick="handleClick()">클릭</button>
+    <!-- 3번째는 잘 쓰지 않는 방법 -->
+
+    <!-- js -->
+    <script>
+      document.querySelector("#btn").addEventListener("click", function () {
+        console.log("이벤트 리스너 사용");
+        // 선택자 querySelector로 #btn(id)을 선택해서 클릭이라는 이벤트가 발생하면 콘솔에 이벤트리스너사용을 찍어주는 기능을 사용함.
+      });
+      document.querySelector(".btn2").addEventListener("click", function () {
+        console.log("이벤트 리스너 사용");
+        // 선택자 querySelector로 .btn2(class)을 선택해서 클릭이라는 이벤트가 발생하면 콘솔에 이벤트리스너사용을 찍어주는 기능을 사용함.
+      });
+
+      const handleClick = function () {
+        console.log("이벤트 리스너 사용");
+      };
+      document.querySelector("#btn").addEventListener("click", handleClick);
+      document.querySelector(".btn2").onclick = handleClick();
+      // 두가지는 같은 방법이다.
+    </script>
+  </body>
+</html>

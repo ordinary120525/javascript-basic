@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object객체</title>
+  </head>
+  <body>
+    <script>
+      // Object 객체 (내장 객체)
+      // {} 안에 있는 것 뿐만 아니라 따지고 보면 모든 것이 다 객체라 할 수 있다
+      // 함수도 객체
+      const person = new Object();
+      // new Object()라는 건 object()의 복사본을 의미
+      //   console.log(person);
+
+      person.firstName = "혜윤";
+      person.lastName = "라";
+      person.getFullName = function () {
+        return this.lastName + this.firstName;
+      };
+
+      console.log(person.getFullName());
+    </script>
+  </body>
+</html>

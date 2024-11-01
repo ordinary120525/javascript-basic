@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object_Array</title>
+  </head>
+  <body>
+    <script>
+      const person = {
+        firstName: "혜윤",
+        lastName: "라",
+        age: 35,
+        job: "무직",
+      };
+
+      //   person = {
+      //     이름: "우주",
+      //     성: "서",
+      //     나이: 2,
+      //     직업: "아기",
+      //   };
+      //   console.log(person); // X 오류가 난다
+
+      person.firstName = "우주";
+      person["firstName"] = "영민";
+
+      console.log(person.firstName); // 영민
+
+      const students = ["혜윤", "우주", "영민"];
+      students[0] = "지은";
+      console.log(students[0]);
+      console.log(students[2]); // 영민
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>콘솔(console)</title>
+  </head>
+  <body>
+    <script>
+      //   document.write("정상적인 코드 이용");
+      //   document.rrite("잘못된 코드 이용");
+      //   console.log("콘솔 창에 출력하기");
+
+      const str = "안녕!";
+      const num = 21;
+
+      const strNum = "안녕! 21";
+
+      let strNum;
+      // strNum = str + " " + num;
+      strNum = `${str} ${num}`;
+      console.log(strNum); // 안녕! 21
+      // strNum = "Hello!" + " " + num;
+      strNum = `Hello! ${num}`;
+
+      console.log(str);
+      console.log(num);
+      console.log(strNum);
+      console.log(str + num);
+      // 연결 연산자로도 가능, 그러나 뛰어쓰기가 안된다.
+      console.log(str + " " + num);
+      // " "를 넣으면 뛰어쓰기가 된다.
+      console.log(`${str} ${num}`);
+      // 이렇게도 가능
+    </script>
+  </body>
+</html>

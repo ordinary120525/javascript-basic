@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>슬라이드 애니메이션 기능</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        background-color: #fff;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      a {
+        display: block;
+        text-decoration: none;
+        color: #333;
+      }
+      img {
+        vertical-align: middle;
+        border: 0;
+      }
+      .img-slide {
+        position: relative;
+        width: 1200px;
+        height: 600px;
+        margin: 50px auto 0;
+        overflow: hidden;
+      }
+      .slide-list {
+        position: relative;
+        display: flex;
+        align-items: center;
+        /* width: 300%; */
+        height: 100%;
+        /* animation: slide 5s ease-in-out infinite; */
+      }
+      /* @keyframes slide {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(-1200px);
+        }
+        100% {
+          transform: translateX(-2400px);
+        }
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="img-slide">
+      <ul class="slide-list">
+        <li>
+          <a href="#">
+            <img src="https://picsum.photos/1200/600?random=1" alt="이미지-1" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="https://picsum.photos/1200/600?random=2" alt="이미지-2" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="https://picsum.photos/1200/600?random=3" alt="이미지-3" />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- js -->
+    <script>
+      //HTML에서 class가 slide-list인 요소를 선택, slideList변수에 저장
+      //이 요소는 슬라이드 항목을 포함하는 컨테이너이다
+      const slideList = document.querySelector(".slide-list");
+      //  console.log(slideList);
+
+      //slideList 내의 모든 li 요소(슬라이드항목)를 선택, slide배열에 저장
+      //각 li는 하나의 슬라이드이다
+      let slides = slideList.querySelectorAll("li");
+      //  console.log(slides);
+
+      //슬랴이드 너비 계산
+      //class가 img-slide인 요소의 너비를 측정, slideWidth변수에 저장
+      //슬라이드 이동 시 이 너비 만큼 이동
+      const slideWidth = document.querySelector(".img-slide").offsetWidth;
+      //  console.log(slideWidth);
+
+      //슬라이드 이동 상태 변수
+      let isTransition = false; // 슬라이드가 애니메이션 중인지 여부를 추적하는 변수
+
+      // 슬라이드 이동 함수
+      // 슬라이드를 왼쪽으로 이동시켜 다음 슬라이드를 보이게 하는 역할
+      const moveSlide = () => {
+        // 현재 슬라이드가 애니메이션 중이 아닐 때만 슬라이드를 이동시킨다.
+        if (!isTransition) {
+          // 슬라이드가 이동 중임을 표시
+          isTransition = true;
+          // 슬라이드를 왼쪽으로 이동시켜 다음 슬라이드가 보이게 한다.
+          slideList.style.marginLeft = `-${slideWidth}px`; //-를 통해 왼쪽으로 이동케 함
+          slideList.style.transition = "margin-left 1s"; //애니메이션 시간 설정
+        }
+
+        // 일정 시간이 지난 후 (transition 시간과 동일하게) 슬라이드 초기화 함수 호출
+        setTimeout(() => {
+          slideList.style.transition = "none"; //애니메이션 없이 이동
+          slideInit(); // 초기화 함수 호출
+        }, 1000); // 1초 후 호출
+      };
+      //isTransition이 false일 때만 슬라이드를 이동
+      //marginLeft를 음수로 설정해 슬라이드를 왼쪽으로 이동, 이동거리만큼의 애니매이션 효과를 주기 위해 transition속성 설정.
+      //setTimeout을 사용해 1초 후에 애니메이션을 없애고 초기화 함수 호출, 이는 슬라이드 애니메이션이 끝난 후 실행.
+
+      // 슬라이드 초기화 함수
+      // 슬라이드를 이동한 후 첫 번째 슬라이드를 마지막으로 이동시켜 무한 슬라이드처럼 보이게 한다.
+      const slideInit = () => {
+        slideList.style.marginLeft = "0px"; // 슬라이드 리스트의 위치를 원래 위치로 초기화
+        //슬라이드 리스트의 margin-left를 0으로 설정.
+        //모든 슬라이드가 원래 위치로 돌아온다. 이 단게는 애니메이션이 끝난 후 다음 슬라이드가 제대로 보이게 하는데 필요.
+        slideList.appendChild(slides[0]); // 첫 번째 슬라이드를 슬라이드 리스트의 끝으로 이동
+        //현재 리스트의 첫번째 슬라이드(slide[0])를 리스트의 긑으로 이동.
+        //이 과정은 사용자가 계속해서 다음 슬라이드를 볼 수 있도록 하며, 슬라이드 쇼가 끝없이 이어지는 것처럼 보이게 함.
+        slides = slideList.querySelectorAll("li"); // 슬라이드 항목 목록을 다시 가져온다. (변경된 순서를 반영하기 위해)
+        //appendChild로 첫번째 슬라이드를 이동시킨 후, slides 변수를 다시 업데이트
+        //이렇게 함으로써 현재 DOM 상태를 반영, 다음 슬라이드를 올바르게 선택할 수 있도록 함.
+
+        isTransition = false;
+        //슬라이드 이동이 완료되었으므로 isTransition을 false로 설정
+        //이제 moveSlide함수가 다시 호출될 수 있다.
+        //이 변수 덕분에 애니메이션 중에는 슬라이드 이동이 중복되지 않도록 방지할 수 있다.
+      };
+
+      // 3초마다 슬라이드 이동
+      setInterval(moveSlide, 3000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>모달 기능</title>
+    <style>
+      .modal-btn {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 40px;
+        background-color: #ff8383;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        line-height: 40px;
+        text-align: center;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .modal-btn:active {
+        box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: none;
+      }
+      .modal.active {
+        display: block;
+      }
+      .modal .inner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 16px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+      .close-btn {
+        width: 150px;
+        height: 40px;
+        background-color: #ff8383;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        line-height: 40px;
+        text-align: center;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .close-btn:active {
+        box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal-btn">
+      <span>클릭</span>
+    </div>
+
+    <div class="modal">
+      <div class="inner">
+        <h1>제목입니다.</h1>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis quas
+          sed nam eum doloribus maxime, modi facere veritatis in doloremque,
+          numquam odit molestiae pariatur quasi repellat eveniet cum. Ducimus,
+          maiores.
+        </p>
+        <div class="close-btn">닫기</div>
+      </div>
+    </div>
+
+    <!-- js -->
+    <script>
+      // 첫번째 예시
+      //   const openModalBtn = document.querySelector(".modal-btn");
+      //   //   console.log(modalOpenBtn);
+      //   const closeModalBtn = document.querySelector(".close-btn");
+      //   //   console.log(closeModalBtn);
+      //   const modal = document.querySelector(".modal");
+      //   //   console.log(modal);
+
+      //   openModalBtn.addEventListener("click", () => {
+      //     // console.log("클릭 버튼 클릭했습니다");
+      //     modal.classList.add("active");
+      //   });
+
+      //   closeModalBtn.addEventListener("click", () => {
+      //     // console.log(closeModalBtn);
+      //     modal.classList.remove("active");
+      //   });
+
+      //   window.addEventListener("click", (e) => {
+      //     // console.log(e.target);
+      //     if (e.target === modal) {
+      //       //   console.log("모달 배경에 클릭했습니다.");
+      //       modal.classList.remove("active");
+      //     }
+      //   });
+      //   // 또는 아래와 같이 window가 아닌 modal로 지정해도 된다.
+      //   modal.addEventListener("click", (e) => {
+      //     // console.log(e.target);
+      //     if (e.target === modal) {
+      //       //   console.log("모달 배경에 클릭했습니다.");
+      //       modal.classList.remove("active");
+      //     }
+      //   });
+
+      // 두번째 예시
+      // 모달 닫기 함수를 사용할 경우에는 이렇게도 가능
+      //   const openModalBtn = document.querySelector(".modal-btn");
+      //   const closeModalBtn = document.querySelector(".close-btn");
+      //   const modal = document.querySelector(".modal");
+      //   const closeModal = () => {
+      //     modal.classList.remove("active");
+      //   };
+      //   openModalBtn.addEventListener("click", () => {
+      //     // console.log("클릭 버튼 클릭했습니다");
+      //     modal.classList.add("active");
+      //   });
+
+      //   closeModalBtn.addEventListener("click", () => {
+      //     // console.log(closeModalBtn);
+      //     closeModal();
+      //   });
+
+      //   window.addEventListener("click", (e) => {
+      //     // console.log(e.target);
+      //     if (e.target === modal) {
+      //       //   console.log("모달 배경에 클릭했습니다.");
+      //       closeModal();
+      //     }
+      //   });
+
+      // 세번째 예시
+      // 모달 열고닫기 함수를 사용할 경우(toggle메서드 사용)
+      //   const openModalBtn = document.querySelector(".modal-btn");
+      //   const closeModalBtn = document.querySelector(".close-btn");
+      //   const modal = document.querySelector(".modal");
+      //   const openCloseModal = () => {
+      //     modal.classList.toggle("active");
+      //   };
+
+      //   openModalBtn.addEventListener("click", () => {
+      //     // console.log("클릭 버튼 클릭했습니다");
+      //     openCloseModal();
+      //   });
+
+      //   closeModalBtn.addEventListener("click", () => {
+      //     // console.log(closeModalBtn);
+      //     openCloseModal();
+      //   });
+
+      //   window.addEventListener("click", (e) => {
+      //     // console.log(e.target);
+      //     if (e.target === modal) {
+      //       //   console.log("모달 배경에 클릭했습니다.");
+      //       openCloseModal();
+      //     }
+      //   });
+
+      // 네번째 예시
+      // 모달 열고닫기 함수를 사용할 경우(boolean 값 사용)
+      const openModalBtn = document.querySelector(".modal-btn");
+      const closeModalBtn = document.querySelector(".close-btn");
+      const modal = document.querySelector(".modal");
+
+      let isActive = false;
+      //모달의 상태를 나타내는 플래그. 기본값 false로 설정.
+
+      const openCloseModal = () => {
+        if (isActive) {
+          //isActive가 true일 경우, 즉 모달이 열려 있을 때의 동작을 처리
+          modal.classList.remove("active");
+          //모달에서 active클래스를 제거하여 모달을 닫는다
+          isActive = false;
+          //모달 상태를 false로 변경
+          console.log("모달을 닫았습니다.");
+        } else {
+          //else:isActive가 false일 경우, 즉 모달이 닫혀 있을 때의 동작을 처리
+          modal.classList.add("active");
+          //모달에 active클래스를 추가하여 모달
+          isActive = true;
+          //모달 상태를 true로 변경
+          console.log("모달을 열었습니다.");
+        }
+      };
+
+      openModalBtn.addEventListener("click", () => {
+        // console.log("클릭 버튼 클릭했습니다");
+        openCloseModal();
+      });
+
+      closeModalBtn.addEventListener("click", () => {
+        // console.log(closeModalBtn);
+        openCloseModal();
+      });
+
+      //모달 배경 클릭 이벤트 리스너
+      window.addEventListener("click", (e) => {
+        // console.log(e.target);
+        // 전체 창에 클릭 이벤트 리스너를 등록
+        // 사용자가 클릭한 요소에 대한 정보를 e라는 이벤트 객체로 가져옴
+        if (e.target === modal) {
+          //   console.log("모달 배경에 클릭했습니다.");
+          // 만약 사용자가 모달 배경(즉 모달이 열린 상태에서 배경 부분)을 클릭하면
+          openCloseModal();
+          // openCloseModal()함수를 호출하여 모달을 닫음
+        }
+      });
+    </script>
+  </body>
+</html>
