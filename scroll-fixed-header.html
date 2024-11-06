@@ -4,6 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>스크롤 요소 고정 - 헤더</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        font-family: "arial", sans-serif;
+        font-size: 16px;
+        background-color: #fff;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      a {
+        display: block;
+        text-decoration: none;
+        color: #333;
+      }
+      .header {
+        background-color: #f5f5f5;
+        padding: 10px;
+        text-align: center;
+      }
+      .navbar {
+        position: relative;
+        width: 100%;
+        background-color: #333;
+        overflow: hidden;
+        transition: transform 0.3s;
+      }
+      .navbar ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .navbar ul li {
+        margin: 0 10px;
+      }
+      .navbar ul li a {
+        text-align: center;
+        color: #fff;
+        padding: 14px 16px;
+      }
+      .navbar ul li a:hover {
+        background-color: #ddd;
+        color: #333;
+      }
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+        opacity: 0.8;
+      }
+    </style>
   </head>
   <body>
     <!-- 헤더 -->
@@ -28,13 +86,13 @@
         <span>VISUAL</span>
       </article>
       <article id="about" class="content">
-        <span>VISUAL</span>
+        <span>ABOUT</span>
       </article>
       <article id="portfolio" class="content">
-        <span>VISUAL</span>
+        <span>PORTFOLIO</span>
       </article>
       <article id="contact" class="content">
-        <span>VISUAL</span>
+        <span>CONTACT</span>
       </article>
     </section>
   </body>
