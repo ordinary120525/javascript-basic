@@ -37,3 +37,7 @@
 
 - fetch.html
 - videoModal.html
+
+# 6 스크롤 헤더 고정 기능
+
+- scroll-fixed-header.html
